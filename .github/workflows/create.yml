@@ -34,9 +34,18 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Get HTTP data
+        uses: CamiloGarciaLaRotta/watermelon-http-client@v1.5
+        with:
+          id: query
+          url: 'https://jsonplaceholder.typicode.com/todos?id=1'
+
+      
+      
       - uses: "finnp/create-file-action@master"
+        name: create File
         env:
           FILE_NAME: "tmp/fileName.txt"
-          FILE_DATA: "file content"
+          FILE_DATA: ${{ steps.query.outputs.response }}
     
     
