@@ -34,3 +34,9 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: "tmp/fileName.txt"
+          FILE_DATA: "file content"
+    
+    
