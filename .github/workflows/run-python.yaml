@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         # in this example, there is a newer version already installed, 3.7.7, so the older version will be downloaded
-        python-version: ['3.8', request]
+        python-version: [pypy-3.7]
 
     steps:
       - name: checkout repo content
@@ -26,6 +26,7 @@ jobs:
           python-version: ${{ matrix.python-version }} #install the python needed
       - name: execute py script # run the run.py to get the latest dat
         run: |
+          pipenv install requests
           python run.py
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
