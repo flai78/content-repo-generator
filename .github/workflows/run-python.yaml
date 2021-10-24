@@ -26,7 +26,8 @@ jobs:
           python-version: ${{ matrix.python-version }} #install the python needed
       - name: execute py script # run the run.py to get the latest dat
         run: |
+          python3 -m pip install --user pipenv
           pipenv install requests
-          python run.py
+          pipenv run python run.py
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
