@@ -25,4 +25,3 @@ jobs:
           python run.py
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
-      - name: export index
