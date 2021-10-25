@@ -3,4 +3,4 @@ The pipeline (content-generator.yml) run a Python script that generate a file in
 Finally, the pipeline invoke the commands git commit and git push.
 
 
-[![run-python](https://github.com/flai78/testactions/actions/workflows/run-python.yaml/badge.svg)](https://github.com/flai78/testactions/actions/workflows/run-python.yaml)
+[![run-python](https://github.com/flai78/testactions/actions/workflows/content-generator.yaml/badge.svg?branch=main)](https://github.com/flai78/testactions/actions/workflows/content-generator.yaml)

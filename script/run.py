@@ -33,8 +33,9 @@ f = open('./tmp/pkey.txt', 'w+')
 update_date = datetime.datetime.now()
 
 f.write(f"Update on {update_date}")
-f.write(f"Data from web service {mydata}")
-f.write(f"Value from env var DATA_KEY {os.getenv('DATA_KEY')}")
+f.writelines(f"Data from web service {mydata}")
+super_secret = os.getenv('DATA_KEY')
+f.writelines(f"Value from GitHub secret DATA_KEY: {super_secret}")
 
 for i in range(10):
      f.write("This is line %d\r\n" % (i+1))
