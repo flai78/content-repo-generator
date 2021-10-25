@@ -37,15 +37,14 @@ jobs:
       #     echo 'The http result is ${{ steps.py-script.outputs.http_result }}'
       - name: py script 2
         uses: actions/github-script@v5
-        id: py-script
         with:
           result-encoding: string
           script: |
-             python3 -m pip install --user pipenv
-             pipenv install requests
-             pipenv run python run.py
-      - name: Get result
-        run: echo "${{steps.py-script.outputs.result}}"
+            python3 -m pip install --user pipenv
+            pipenv install requests
+            return pipenv run python run.py
+      # - name: Get result
+      #   run: echo "${{steps.py-script.outputs.result}}"
       
       # - uses: "finnp/create-file-action@master"
       #   name: create File
