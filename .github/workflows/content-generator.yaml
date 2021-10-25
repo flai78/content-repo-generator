@@ -34,7 +34,7 @@ jobs:
           #output=$(python ./script/run.py)
           #echo "::set-output name=result::$output"
         env:
-          key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
+          SUPER_SECRET: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       
       #- name: write script result
       #  run: |
