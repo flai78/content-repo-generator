@@ -35,4 +35,4 @@ jobs:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       - name: write script result
         run: |
-          echo 'The http result is ${{ steps.vars.py-script.http_result }}'
+          echo 'The http result is ${{ steps.py-script.outputs.http_result }}'
