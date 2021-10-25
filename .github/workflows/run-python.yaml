@@ -25,14 +25,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }} #install the python needed
       - name: execute py script # run the run.py to get the latest dat
+        id: py-script
         run: |
           python3 -m pip install --user pipenv
           pipenv install requests
           pipenv run python run.py
-          export FOO=bar
-          echo "::set-env name=FOO::$FOO"
+          echo ::set-env name=HTTP_RESULT::'TEST OUTPUT VALUE'
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       - name: write script result
         run: |
-          echo $FOO
+          run: echo "The http result is ${{ steps.py-script.HTTP_RESULT }}"
