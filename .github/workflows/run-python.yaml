@@ -29,5 +29,10 @@ jobs:
           python3 -m pip install --user pipenv
           pipenv install requests
           pipenv run python run.py
+          export FOO=bar
+          echo "::set-env name=FOO::$FOO"
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
+      - name: write script result
+        run: |
+          echo $FOO
