@@ -23,16 +23,19 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v2.2.2
         with:
-          python-version: ${{ matrix.python-version }} #install the python needed
-      - name: execute py script # run the run.py to get the latest dat
-        id: py-script
+          python-version: '3.8' #install the python needed
+      - name: install python packages
         run: |
-          python3 -m pip install --user pipenv
-          pipenv install requests
-          pipenv run python run.py
-          #echo ::set-output name=http_result:: | $(pipenv run python run.py)
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      
+      - name: execute python script # run the run.py to get the latest dat
+        id: py-script
+        run: python run.py
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
+      
       - name: write script result
         run: |
           echo 'The http result is ${{ steps.py-script.outputs.result }}'
@@ -45,3 +48,15 @@ jobs:
       #   env:
       #     FILE_NAME: "tmp/fileName.txt"
       #     FILE_DATA: ${{ steps.query.outputs.response }}
+
+      # - name: commit files
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add -A
+      #     git commit -m "update data" -a
+      # - name: push changes
+      #   uses: ad-m/github-push-action@v0.6.0
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: main
