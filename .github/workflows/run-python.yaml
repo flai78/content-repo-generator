@@ -44,7 +44,7 @@ jobs:
         uses: actions/github-script@v5.0.0
         id: set-result
         with:
-          script: return | echo python run.py
+          script: python run.py
           result-encoding: string
        
       - name: Get result
