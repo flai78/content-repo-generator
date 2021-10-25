@@ -30,9 +30,9 @@ jobs:
           python3 -m pip install --user pipenv
           pipenv install requests
           pipenv run python run.py
-          echo ::set-output name=HTTP_RESULT::'TEST OUTPUT VALUE'
+          echo ::set-output name=http_result::"TEST OUTPUT VALUE"
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       - name: write script result
         run: |
-          echo "The http result is ${{ steps.py-script.HTTP_RESULT }}"
+          echo 'The http result is ${{ steps.vars.py-script.http_result }}'
