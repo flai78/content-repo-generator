@@ -24,17 +24,17 @@ jobs:
         uses: actions/setup-python@v2.2.2
         with:
           python-version: ${{ matrix.python-version }} #install the python needed
-      - name: execute py script # run the run.py to get the latest dat
-        id: py-script
-        run: |
-          python3 -m pip install --user pipenv
-          pipenv install requests
-          echo ::set-output name=http_result:: | $(pipenv run python run.py)
-        env:
-          key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
-      - name: write script result
-        run: |
-          echo 'The http result is ${{ steps.py-script.outputs.http_result }}'
+      # - name: execute py script # run the run.py to get the latest dat
+      #   id: py-script
+      #   run: |
+      #     python3 -m pip install --user pipenv
+      #     pipenv install requests
+      #     echo ::set-output name=http_result:: | $(pipenv run python run.py)
+      #   env:
+      #     key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
+      # - name: write script result
+      #   run: |
+      #     echo 'The http result is ${{ steps.py-script.outputs.http_result }}'
       - name: py script 2
         uses: actions/github-script@v5
         id: get-data-py
@@ -45,3 +45,9 @@ jobs:
              pipenv run python run.py
       - name: Get result
         run: echo "${{steps.get-data-py.outputs.result}}"
+      
+      # - uses: "finnp/create-file-action@master"
+      #   name: create File
+      #   env:
+      #     FILE_NAME: "tmp/fileName.txt"
+      #     FILE_DATA: ${{ steps.query.outputs.response }}
