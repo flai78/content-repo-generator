@@ -32,7 +32,9 @@ jobs:
       
       - name: execute python script # run the run.py to get the latest dat
         id: py-script
-        run: python run.py
+        run: | 
+          output=$(python run.py)
+          echo "::set-output name=result::$output"
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       
@@ -40,24 +42,12 @@ jobs:
         run: |
           echo 'The http result is ${{ steps.py-script.outputs.result }}'
 
-      - name: write script result
-        id: set-result
-        run: | 
-          output=$(python run.py)
-          echo "::set-output name=result::$output"
-       
-      - name: Get result
-        run: echo "${{steps.set-result.outputs.result}}"
-      
-
-      # - name: Get result
-      #   run: echo "${{steps.py-script.outputs.result}}"
       
       # - uses: "finnp/create-file-action@master"
       #   name: create File
       #   env:
       #     FILE_NAME: "tmp/fileName.txt"
-      #     FILE_DATA: ${{ steps.query.outputs.response }}
+      #     FILE_DATA: ${{ steps.py-script.outputs.result }}
 
       # - name: commit files
       #   run: |
