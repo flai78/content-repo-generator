@@ -29,9 +29,19 @@ jobs:
         run: |
           python3 -m pip install --user pipenv
           pipenv install requests
-          echo ::set-output name=http_result:: | echo pipenv run python run.py
+          echo ::set-output name=http_result:: | $(pipenv run python run.py)
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       - name: write script result
         run: |
           echo 'The http result is ${{ steps.py-script.outputs.http_result }}'
+      - name: py script 2
+        uses: actions/github-script@v5
+        id: get-data-py
+        with:
+          script: |
+             python3 -m pip install --user pipenv
+             pipenv install requests
+             pipenv run python run.py
+      - name: Get result
+        run: echo "${{steps.get-data-py.outputs.result}}"
