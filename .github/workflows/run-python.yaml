@@ -39,7 +39,18 @@ jobs:
       - name: write script result
         run: |
           echo 'The http result is ${{ steps.py-script.outputs.result }}'
+
+      - name: execute script
+        uses: actions/github-script@v5
+        id: set-result
+        with:
+          script: return python run.py
+          result-encoding: string
+       
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
       
+
       # - name: Get result
       #   run: echo "${{steps.py-script.outputs.result}}"
       
