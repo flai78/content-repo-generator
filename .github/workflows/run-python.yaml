@@ -29,8 +29,7 @@ jobs:
         run: |
           python3 -m pip install --user pipenv
           pipenv install requests
-          pipenv run python run.py
-          echo ::set-output name=http_result::"TEST OUTPUT VALUE"
+          echo ::set-output name=http_result:: | pipenv run python run.py
         env:
           key: ${{ secrets.DATA_KEY }} # if run.py requires passwords..etc, set it as secrets
       - name: write script result
